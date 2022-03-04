@@ -1,0 +1,57 @@
+
+/*Find the K-th Element of given arrays that are sorted w/o using extra spaces/ds
+
+*/
+class FindKthElementFromSortedArray{
+
+	public static void main(String[] args) {
+		int[] a= {3,4,5,6,8};
+		int[] b= {6,7,9,10};
+		int k=9;
+		//if sorted->3,4,5,6,6,7,8,9,10
+		//indicex--->1,2,3,4,5,6,7,8,9
+		int kthElement = findKthElement(a,b,k);
+		System.out.println("kthElement: "+ kthElement);
+	}
+
+	public static int findKthElement(int[] a, int[] b, int k) {
+		
+		int i=0, j=0, count=0;
+		int alen = a.length;
+		int blen = b.length;
+		
+		while(i< alen && j< blen) {
+			if(a[i] < b[j]) {
+				count++;
+				if(count==k) {
+					return a[i];
+				}
+				i++;
+			}else {
+					count++;
+					if(count==k) {
+						return b[j];
+					}
+					j++;
+			}
+			
+		}
+		// traverse until the end of array a
+		while( i < alen) {
+			count++;
+			if(count==k) {
+				return a[i];
+			}
+			i++;
+		}
+		// traverse until the end of array b
+		while( j < blen) {
+			count++;
+			if(count==k) {
+				return b[j];
+			}
+			j++;
+		}
+		return -1;
+	}
+}
